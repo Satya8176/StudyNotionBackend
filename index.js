@@ -5,13 +5,6 @@ const bodyParser = require("body-parser");
 const crypto = require("crypto");
 
 
-// app.use(
-//   cors({
-//     origin: '*',  // Your frontend
-//     credentials: true
-//   })
-// );
-
 const allowedOrigins = [
   "http://localhost:5173",
   "https://06675f305432.ngrok-free.app"
@@ -31,10 +24,7 @@ app.use(cors({
   credentials: true // 🔐 allow cookies and sessions
 }));
 
-// app.use(express.json({ type: '*/*' }));
 
-
-//  WE HAVE TO CHECK WHY VIDEO IS NOT UPLOADED AND WHY WHEN WE DELETE SUBSECTION THEN WHY IT IS NOT REMOVED FORM THE SECTION AND SOME OTHER TESTING
 
 //rotues are imported here 
 const userRoute=require('./routes/User');
@@ -51,7 +41,7 @@ const dotenv=require('dotenv');
 const { verifySignature } = require('./controller/Payment');
 
 dotenv.config()
-const PORT=process.env.PORT || 3000
+const PORT=process.env.PORT || 3000;
 
 //data base connection here 
 database();
@@ -75,57 +65,6 @@ app.use(
 //cloudinary connect 
 cloudinaryConnect();
 
-// app.post(
-//   "/api/v1/payment/verifySignature",
-//   bodyParser.raw({ type: "application/json" }), // match Razorpay's Content-Type
-//   async (req, res) => {
-//       try{
-//           console.log("I am here in verify Signature");
-//           // console.log("REw is ",req)
-//           const webHookSecret="12345678";//this is from the server we have 
-//           const signature=req.headers["x-razorpay-signature"];//this is the secret from the razorpay 
-//           const shasum=crypto.createHmac("sha256",webHookSecret);
-//           shasum.update(JSON.stringify(req.body));
-//           const digest=shasum.digest("hex");
-//           if(digest.trim() === signature.trim()){
-//             console.log("Payment is authorised  I have to readh here ")
-//             const {courseId,userId}=req.body.payload.payment.entity.notes;
-//             const updateCourse=await Course.findByIdAndUpdate({_id:courseId},
-//               {
-//                 $push:{
-//                   studentEnrolled:userId
-//                 }
-//               },
-//               {new:true}
-//             )
-//             const updateUser=await User.findByIdAndUpdate({_id:userId},
-//               {
-//                 $push:{
-//                   courses:courseId
-//                 }
-//               },
-//               {new:true}
-//             )
-//             const UserDetail=await User.findById(userId);
-//             sendEmail(UserDetail.email,"From studyNotion regards with the course Buying",`Successfully purchased course ${courseId}`);
-//             res.status(200).json({
-//               success:true,
-//               message:"User and Course both are updated successfully"
-//             })
-//           }
-//           else{
-//             return res.status(400).json({
-//               success:false,
-//               messsage:"Something went wrong in verfy signature from razrpay pls try again later"
-//             })
-//           }
-//         }
-//      catch (err) {
-//       console.error("🔥 Error in webhook handler:", err);
-//       return res.status(500).json({ error: "Internal server error" });
-//     }
-//   }
-// );
 
 
 
@@ -145,9 +84,10 @@ app.post(
 );
 
 app.get('/', (req ,res)=>{
+  res.send("App is running...")
   return res.json({
     success:true,
-    message:`Server is runnign fine`
+    message:`App is running...`
   })
 })
 

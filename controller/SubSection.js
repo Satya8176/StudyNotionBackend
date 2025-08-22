@@ -9,7 +9,6 @@ exports.createSubSection=async(req,res)=>{
   try{
     const {sectionId,title,timeDuration=10,description}=req.body;
     const videoFile=req.files.videoFile;
-    console.log("Video file is here in the controller ",videoFile)
     if(!sectionId || !title || !description || !videoFile){
       return res.status(402).json({
         success:false,
@@ -17,7 +16,6 @@ exports.createSubSection=async(req,res)=>{
       })
     }
     const videoDetail=await uploadImageCloudinary(videoFile,process.env.CLOUD_FOLDER);
-    console.log(videoDetail)
     const newSubsection=await Subsection.create({
       title,
       timeDuration,
@@ -147,7 +145,6 @@ exports.getSubSectionDetail=async (req,res)=>{
     })
   }
   catch(err){
-    console.log("This is the error in fetching lecture detail",err.message)
     return res.status(500).json({
       success:false,
       body:err.message,

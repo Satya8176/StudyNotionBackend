@@ -15,7 +15,6 @@ const sendEmail=async (email,title,body)=>{
     subject:title,
     html:body
   })
-  // console.log(info);
 }
 
 module.exports=sendEmail

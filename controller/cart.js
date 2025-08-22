@@ -36,7 +36,7 @@ exports.addToCart=async (req,res)=>{
       success:true,
       body:"Item Added successfully"
     })
-    // console.log(userData);
+  
   }
   catch(err){
     return res.status(500).json({

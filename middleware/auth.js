@@ -5,8 +5,6 @@ require('dotenv').config()
 exports.auth=async (req , res , next)=>{
   try{
     const token=req.cookies.token || req.body.token ;
-    // || req.header("Autherisation").replace("Beaere ","")
-    // console.log("i am here");
     if(!token){
       return res.status(400).json({
         success:false,
@@ -15,7 +13,6 @@ exports.auth=async (req , res , next)=>{
     }
     try{
       const decode=jwt.verify(token,process.env.JWT_SECRET);
-      // console.log(decode)
       req.user=decode;
       
     }
@@ -72,7 +69,6 @@ exports.isInstructor=async (req , res, next)=>{
 }
 exports.isAdmin=async (req , res, next)=>{
   try{
-    // console.log(req.user);
     if(req.user.accountType !=="Admin"){
       return res.status(402).json({
         success:false,

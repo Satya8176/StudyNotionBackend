@@ -5,9 +5,9 @@ const uploadImageCloudinary=require('../utils/uploadImageCloudinary')
 
 exports.updateProfile=async (req , res)=>{
   try{
-    // console.log("i am here ")
+    
     const {gender,dateOfBirth="",about="",contactNumber="",profession="",firstName="",lastName=""}=req.body;
-    // console.log(req.body)
+    
     if(!gender){
       return res.status(400).json({
         success:false,
@@ -37,7 +37,6 @@ exports.updateProfile=async (req , res)=>{
       {new:true}
     )
     const profileId=userDetail.additionalDetal;
-    // console.log(profileId)
     const profileDetail=await Profile.findById(profileId);
     profileDetail.gender=gender;
     profileDetail.profession=profession;
@@ -124,7 +123,7 @@ exports.getUserDetail=async (req,res)=>{
     })
   }
   catch(err){
-    console.error(err);
+    // console.error(err);
     res.status(500).json({
       success:false,
       message:"Something went wrong while fetching user detail"

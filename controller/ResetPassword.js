@@ -13,7 +13,6 @@ exports.resetPasswordToken=async (req , res)=>{
         message:"Please enter the email"
       })
     }
-    // console.log("I am here ")
     if(! await User.findOne({email})){
       return res.status(403).json({
         success:false,
@@ -21,7 +20,6 @@ exports.resetPasswordToken=async (req , res)=>{
       })
     }
     const token=crypto.randomUUID();
-    // console.log("i am here ")
     const response=await User.findOneAndUpdate({email:email},{token:token,expireTokenTime:Date.now() + 5*60*1000},{new:true});
     
     const url=`http://localhost:5173/updatePassword/${token}`
@@ -52,7 +50,6 @@ exports.resetPasswordToken=async (req , res)=>{
     </div>
   `;
     await sendEmail(email,"Reset Password Link From StudyNotion",body);
-    // console.log("I am here Now......")
     return res.status(200).json({
       success:true,
       response,

@@ -9,7 +9,6 @@ require('dotenv').config();
 exports.capturePayment=async(req , res)=>{
   try{
     const {courseId}=req.body;
-    // console.log("userId is",req.user);
     const userId=req.user.id;
     if(!userId){
       return res.status(400).json({
@@ -44,7 +43,6 @@ exports.capturePayment=async(req , res)=>{
       }
       try{
         const razorpayRes=await razorpay.orders.create(option);
-        // console.log(razorpayRes)
         return res.status(200).json({
           success:true,
          // cousreDetail:courseDetail,
@@ -79,14 +77,12 @@ exports.capturePayment=async(req , res)=>{
 
 exports.verifySignature=async(req, res)=>{
   try{
-    // console.log("I am here in verify Signature");
     const webHookSecret="12345678";//this is from the server we have 
     const signature=req.headers["x-razorpay-signature"];//this is the secret from the razorpay 
     const shasum=crypto.createHmac("sha256",webHookSecret);
     shasum.update(JSON.stringify(req.body));
     const digest=shasum.digest("hex");
     if(digest.trim() === signature.trim()){
-      // console.log("Payment is authorised  I have to readh here ")
       const { courseId, userId } = req.body.payload.payment.entity.notes;
       const updateCourse=await Course.findByIdAndUpdate({_id:courseId},
         {

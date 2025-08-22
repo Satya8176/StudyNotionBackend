@@ -12,16 +12,13 @@ exports.createCourse= async(req , res)=>{
   try{
     const {courseName,courseDescription,whatYouWillLearn,price,category}=req.body;
     const thumbnail=req.files.thumbnailImg;
-    // console.log(thumbnail);
     if(!courseName || !courseDescription || !whatYouWillLearn || !price || !category || !thumbnail){
       return res.status(402).json({
         success:false,
         message:"All field are neccssary to filled"
       })
     }
-    // console.log("category req is ",category);
     const categoryId =new mongoose.Types.ObjectId(category)
-    // TOdo is for the checking the user id and instrictor id 
     const userID=req.user.id;
     const userDetail=await User.findById(userID);
     if(! userDetail){
@@ -42,7 +39,6 @@ exports.createCourse= async(req , res)=>{
 
     const response=await uploadImageCloudinary(thumbnail,process.env.CLOUD_FOLDER,400,50);
     const thumbURl=response.secure_url;
-    // console.log(typeof(category))
     
     
     const newCourse=await Course.create({
@@ -64,8 +60,6 @@ exports.createCourse= async(req , res)=>{
       },
       {new:true}
     )
-    // console.log("hey i am here")
-    console.log("Caterigy id is ",categoryId)
     await Category.findByIdAndUpdate(
       {_id:categoryId},
       {
@@ -161,7 +155,7 @@ exports.getCourseDetails=async(req,res)=>{
     })
   }
   catch(err){
-    console.log(err);
+    // console.log(err);
     return res.status(500).json({
       success:false,
       message:err.message
@@ -201,7 +195,7 @@ exports.getAllSection=async(req,res)=>{
     })
   }
   catch(err){
-    console.log("There is some error in fetching all the section");
+    // console.log("There is some error in fetching all the section");
     return res.status(500).json({
       success:false,
       message:"There is some error in fetching the detail of the Sections"
@@ -243,7 +237,7 @@ exports.getDraftCourseDetail=async (req,res)=>{
     })
   }
   catch(err){
-    console.log("There is some error in this drafted course detail");
+    // console.log("There is some error in this drafted course detail");
     return res.status(502).json({
       success:false,
       message:"This is some Server issue"
@@ -279,7 +273,7 @@ exports.updateCourse=async(req,res)=>{
     })
   }
   catch(err){
-    console.log(err.message);
+
     return res.status(502).json({
       success:false,
       message:err.message
@@ -309,7 +303,7 @@ exports.updateDraftCourse=async(req,res)=>{
     })
   }
   catch(err){
-    console.error(err);
+    // console.error(err);
     return res.status(500).josn({
       success:false,
       message:err.message
@@ -359,7 +353,6 @@ exports.deleteCourse=async (req,res)=>{
         }
         // await Section.findByIdAndDelete(sectionId);
         await Section.findOneAndDelete({_id:sectionId});
-        console.log("Hey I am here ");
       }
     }
     

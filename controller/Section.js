@@ -5,7 +5,7 @@ const Section=require('../models/Section')
 
 exports.createSection=async (req , res)=>{
   try{
-    console.log(req.body);
+    
     const {sectionName,courseId}=req.body;
     if(!sectionName || !courseId){
       return res.status(402).json({

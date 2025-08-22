@@ -45,7 +45,7 @@ exports.createRating=async(req,res)=>{
     })
   }
   catch(err){
-    console.error(err)
+    // console.error(err)
     res.status(500).json({
       success:false,
       message:err.message
@@ -81,7 +81,7 @@ exports.getAverageRating=async (req, res)=>{
     })
   }
   catch(err){
-    console.log(err);
+    // console.log(err);
     return res.status(500).json({
       success:false,
       message:err.message
@@ -138,7 +138,7 @@ exports.getCourseRating=async (req, res)=>{
     })
   }
   catch(err){
-    console.error(err)
+    // console.error(err)
     return res.status(500).json({
       success:false,
       message:"Something went wrong please fetch the detail after some times"

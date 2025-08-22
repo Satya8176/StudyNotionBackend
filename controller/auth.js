@@ -18,7 +18,6 @@ exports.sendOTP = async (req ,res )=>{
     const {email}=req.body;
     
     const chechEmailPresent=await User.findOne({email:email});
-    console.log("I am here at otp");
     if(chechEmailPresent){
       return res.status(401).json({
         success:false,
@@ -32,7 +31,6 @@ exports.sendOTP = async (req ,res )=>{
       specialChars:false
     })
     
-    // console.log("OTP IS ",otp);
     const result=await OTP.findOne({otp:otp});
     while(result){
       otp=otpGenerator.generate(6,{
@@ -47,7 +45,6 @@ exports.sendOTP = async (req ,res )=>{
     email,
   }
   const otpbody=await OTP.create(otpPayload);
-  // console.log(otpbody);
 
   //Here this is the format for the otp 
   const body = `
@@ -103,14 +100,13 @@ exports.singUp=async (req , res)=>{
         message:"All field are neccessary"
       })
     }
-    // otp=Number(otp);
     if(password != confirmPasseord){
       return res.status(403).json({
         success:false,
         message:"confirm pass and apss is not matched "
       })
     }
-    // console.log("I am in the singup")
+
     const checkpresence=await User.findOne({email});
     if(checkpresence){
       return res.status(405).json({
@@ -120,7 +116,6 @@ exports.singUp=async (req , res)=>{
     }
     
     const recentOtps=await OTP.find({email}).sort({createdAt:-1}).limit(1);
-    // console.log(recentOtps)
     if(recentOtps.length===0){
       return res.status(400).json({
         success:false,
@@ -128,8 +123,6 @@ exports.singUp=async (req , res)=>{
       })
     }
     const recentOtp=recentOtps[0].otp;
-    // console.log(recentOtp);
-    // console.log(otp);
     if(otp != recentOtp){
       return res.status(407).json({
         success:false,
@@ -138,7 +131,6 @@ exports.singUp=async (req , res)=>{
     }
     
     const hashedpasswd=await bycript.hash(password,10);
-    // console.log(hashedpasswd);
     const profile=await Profile.create({
       gender:null,
       dateOfBirth:null,
@@ -156,7 +148,7 @@ exports.singUp=async (req , res)=>{
       additionalDetal:profile._id,
       image:`https://api.dicebear.com/8.x/initials/svg?seed=${firstName} ${lastName}`
     })
-    // console.log("till here")
+
     return res.status(200).json({
       success:true,
       data:responseUser,
@@ -172,10 +164,9 @@ exports.singUp=async (req , res)=>{
   }
 }
 
-//sign IN
+
 exports.signIn=async (req , res)=>{
   try{
-    // console.log("Hey i am here ")
     const {email,password}=req.body;
     if(!email || !password ){
       return res.status(403).json({
@@ -241,12 +232,6 @@ exports.changePassword = async (req ,res )=>{
       })
     }
     
-    // if(newPassword !== confirmNewPassword){
-    //   return res.status(402).json({
-    //     success:false,
-    //     message:"Password did not match with eachother"
-    //   })
-    // }
     const userDetail=await User.findOne({email})
     if(!userDetail){
       return res.status(424).json({
@@ -254,14 +239,12 @@ exports.changePassword = async (req ,res )=>{
         message:"User not found"
       })
     }
-    // console.log(userDetail.password);
     if(!await bycript.compare(oldPassword,userDetail.password)){
       return res.status(402).json({
         success:false,
         message:"Password not correct"
       })
     }
-    // console.log("i am here ")
     const hashedpasswd=await bycript.hash(newPassword,10);
     const response=await User.findByIdAndUpdate({_id:userDetail._id},{password:hashedpasswd},{new:true});
     return res.status(200).json({
@@ -270,8 +253,8 @@ exports.changePassword = async (req ,res )=>{
     })
   }
   catch(err){
-    console.error(err);
-    console.log(err.message);
+    // console.error(err);
+    // console.log(err.message);
     res.status(500).json({
       success:true,
       message:"Some thing bad has happened Please try again later"

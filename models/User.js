@@ -96,10 +96,9 @@ userSchema.post("save",async function (docs){
       "🎓 Your StudyNotion account is ready",
       body
     )
-    // console.log(info);
   }
   catch(err){
-    console.log("There is some error triggering the post middle ware of the singup")
+    // console.log("There is some error triggering the post middle ware of the singup")
     return res.status(400).json({
       success:false,
       message:"Post middleware not worked"
