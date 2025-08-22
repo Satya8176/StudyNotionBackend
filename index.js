@@ -4,24 +4,29 @@ const cors = require('cors');
 const bodyParser = require("body-parser");
 const crypto = require("crypto");
 
+//Here when in the place of these url when we deploy the frontend then here we paste out the frontend app link
 
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://06675f305432.ngrok-free.app"
-];
+// const allowedOrigins = [
+//   "http://localhost:5173",
+//   "https://06675f305432.ngrok-free.app"
+// ];
+// app.use(cors({
+//   origin: function (origin, callback) {
+//     // Allow requests with no origin (like mobile apps, curl, Postman)
+//     if (!origin) return callback(null, true);
+
+//     if (allowedOrigins.includes(origin)) {
+//       return callback(null, true);
+//     } else {
+//       return callback(new Error("Not allowed by CORS"));
+//     }
+//   },
+//   credentials: true // 🔐 allow cookies and sessions
+// }));
 
 app.use(cors({
-  origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps, curl, Postman)
-    if (!origin) return callback(null, true);
-
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    } else {
-      return callback(new Error("Not allowed by CORS"));
-    }
-  },
-  credentials: true // 🔐 allow cookies and sessions
+  origin: true,       
+  credentials: true
 }));
 
 
