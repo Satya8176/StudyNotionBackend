@@ -1,8 +1,11 @@
 const express=require('express')
 const app=express()
-const cors = require('cors');
 const bodyParser = require("body-parser");
 const crypto = require("crypto");
+const cors=require('cors')
+
+// app.use(cors({origin:true}))
+
 
 //Here when in the place of these url when we deploy the frontend then here we paste out the frontend app link
 
@@ -35,7 +38,6 @@ const courseRoute=require('./routes/Course');
 const paymentRoute=require('./routes/Payment');
 const profileRoute=require('./routes/Profile');
 const contactRoute=require('./routes/Contact');
-
 const database=require('./config/database')
 const cookieParser=require('cookie-parser')
 const {cloudinaryConnect}=require('./config/cloudinary')
