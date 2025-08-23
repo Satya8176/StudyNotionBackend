@@ -5,6 +5,10 @@ const crypto = require("crypto");
 const cors=require('cors')
 
 // app.use(cors({origin:true}))
+app.use(cors({
+  origin: "https://study-notion-front-end-livid.vercel.app", // ✅ exact domain
+  credentials: true
+}));
 
 
 //Here when in the place of these url when we deploy the frontend then here we paste out the frontend app link
@@ -27,10 +31,6 @@ const cors=require('cors')
 //   credentials: true // ✅ allows cookies / Authorization headers
 // }));
 
-app.use(cors({
-  origin: true,       
-  credentials: true
-}));
 
 //rotues are imported here 
 const userRoute=require('./routes/User');
