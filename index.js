@@ -6,21 +6,22 @@ const crypto = require("crypto");
 
 //Here when in the place of these url when we deploy the frontend then here we paste out the frontend app link
 
+// ✅ Allow your frontend + localhost (for dev)
 const allowedOrigins = [
+  "http://localhost:5173", 
   "https://study-notion-front-end-livid.vercel.app"
 ];
+
 app.use(cors({
   origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps, curl, Postman)
     if (!origin) return callback(null, true);
-
     if (allowedOrigins.includes(origin)) {
-      return callback(null, true);
+      callback(null, true);
     } else {
-      return callback(new Error("Not allowed by CORS"));
+      callback(new Error("Not allowed by CORS"));
     }
   },
-  credentials: true // 🔐 allow cookies and sessions
+  credentials: true // ✅ allows cookies / Authorization headers
 }));
 
 // app.use(cors({
