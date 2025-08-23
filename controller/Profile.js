@@ -102,6 +102,7 @@ exports.deleteProfile=async (req,res)=>{
 exports.getUserDetail=async (req,res)=>{
   try{
     const userId=req.user.id;
+    console.log("User is ",userId);
     const userDetail=await User.findById(userId)
                      .populate({
                         path:"additionalDetal"
@@ -123,7 +124,7 @@ exports.getUserDetail=async (req,res)=>{
     })
   }
   catch(err){
-    // console.error(err);
+    console.error(err);
     res.status(500).json({
       success:false,
       message:"Something went wrong while fetching user detail"
