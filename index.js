@@ -9,7 +9,7 @@ const crypto = require("crypto");
 // ✅ Allow your frontend + localhost (for dev)
 const allowedOrigins = [
   "http://localhost:5173", 
-  "https://study-notion-front-end-livid.vercel.app"
+  "https://study-notion-front-end-livid.vercel.app/*"
 ];
 
 app.use(cors({
