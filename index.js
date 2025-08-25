@@ -87,11 +87,11 @@ app.post(
 );
 
 app.get('/', (req ,res)=>{
-  res.send("App is running...")
-  return res.json({
-    success:true,
-    message:`App is running...`
-  })
+  return res.send("App is working fine");
+  // return res.json({
+  //   success:true,
+  //   message:`App is running...`
+  // })
 })
 
 app.listen(PORT,()=>{
