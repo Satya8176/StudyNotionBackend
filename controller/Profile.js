@@ -127,7 +127,8 @@ exports.getUserDetail=async (req,res)=>{
     console.error(err);
     res.status(500).json({
       success:false,
-      message:"Something went wrong while fetching user detail"
+      message:"Something went wrong while fetching user detail",
+      body:err.message
     })
   }
 }

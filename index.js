@@ -38,6 +38,8 @@ const courseRoute=require('./routes/Course');
 const paymentRoute=require('./routes/Payment');
 const profileRoute=require('./routes/Profile');
 const contactRoute=require('./routes/Contact');
+
+
 const database=require('./config/database')
 const cookieParser=require('cookie-parser')
 const {cloudinaryConnect}=require('./config/cloudinary')
