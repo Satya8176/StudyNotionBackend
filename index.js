@@ -3,6 +3,11 @@ const app=express()
 const bodyParser = require("body-parser");
 const crypto = require("crypto");
 const cors=require('cors')
+const database=require('./config/database')
+const cookieParser=require('cookie-parser')
+const {cloudinaryConnect}=require('./config/cloudinary')
+const fileUpload=require('express-fileupload')
+const dotenv=require('dotenv');
 
 // app.use(cors({origin:true}))
 // app.use(cors({
@@ -18,6 +23,12 @@ const allowedOrigins = [
   "https://study-notion-front-end-livid.vercel.app"
 ];
 
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser())
+//data base connection here 
+database();
+
 app.use(cors({
   origin: function (origin, callback) {
     if (!origin) return callback(null, true);
@@ -29,21 +40,6 @@ app.use(cors({
   },
   credentials: true // ✅ allows cookies / Authorization headers
 }));
-
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser())
-
-const database=require('./config/database')
-const cookieParser=require('cookie-parser')
-const {cloudinaryConnect}=require('./config/cloudinary')
-const fileUpload=require('express-fileupload')
-const dotenv=require('dotenv');
-
-
-//data base connection here 
-database();
-
 
 
 //rotues are imported here 
