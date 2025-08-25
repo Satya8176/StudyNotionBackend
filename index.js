@@ -5,31 +5,30 @@ const crypto = require("crypto");
 const cors=require('cors')
 
 // app.use(cors({origin:true}))
-app.use(cors({
-  origin: "https://study-notion-front-end-livid.vercel.app", // ✅ exact domain
-  credentials: true
-}));
+// app.use(cors({
+//   origin: "https://study-notion-front-end-livid.vercel.app", // ✅ exact domain
+//   credentials: true
+// }));
 
 
 //Here when in the place of these url when we deploy the frontend then here we paste out the frontend app link
 
 // ✅ Allow your frontend + localhost (for dev)
-// const allowedOrigins = [
-//   "http://localhost:5173", 
-//   "https://study-notion-front-end-livid.vercel.app/*"
-// ];
+const allowedOrigins = [
+  "https://study-notion-front-end-livid.vercel.app"
+];
 
-// app.use(cors({
-//   origin: function (origin, callback) {
-//     if (!origin) return callback(null, true);
-//     if (allowedOrigins.includes(origin)) {
-//       callback(null, true);
-//     } else {
-//       callback(new Error("Not allowed by CORS"));
-//     }
-//   },
-//   credentials: true // ✅ allows cookies / Authorization headers
-// }));
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true // ✅ allows cookies / Authorization headers
+}));
 
 
 //rotues are imported here 
