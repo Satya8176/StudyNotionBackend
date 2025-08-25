@@ -19,15 +19,15 @@ const dotenv=require('dotenv');
 //Here when in the place of these url when we deploy the frontend then here we paste out the frontend app link
 
 // ✅ Allow your frontend + localhost (for dev)
-const allowedOrigins = [
-  "https://study-notion-front-end-livid.vercel.app"
-];
-
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser())
 //data base connection here 
 database();
+const allowedOrigins = [
+  "https://study-notion-front-end-livid.vercel.app"
+];
+
 
 app.use(cors({
   origin: function (origin, callback) {
