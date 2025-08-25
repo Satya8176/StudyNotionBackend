@@ -30,6 +30,21 @@ app.use(cors({
   credentials: true // ✅ allows cookies / Authorization headers
 }));
 
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser())
+
+const database=require('./config/database')
+const cookieParser=require('cookie-parser')
+const {cloudinaryConnect}=require('./config/cloudinary')
+const fileUpload=require('express-fileupload')
+const dotenv=require('dotenv');
+
+
+//data base connection here 
+database();
+
+
 
 //rotues are imported here 
 const userRoute=require('./routes/User');
@@ -39,25 +54,11 @@ const profileRoute=require('./routes/Profile');
 const contactRoute=require('./routes/Contact');
 
 
-const database=require('./config/database')
-const cookieParser=require('cookie-parser')
-const {cloudinaryConnect}=require('./config/cloudinary')
-const fileUpload=require('express-fileupload')
-const dotenv=require('dotenv');
 const { verifySignature } = require('./controller/Payment');
 
 dotenv.config()
 const PORT=process.env.PORT || 3000;
 
-//data base connection here 
-database();
-
-
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser())
-
-// app.use(cors());
 
 app.use(
   fileUpload(
