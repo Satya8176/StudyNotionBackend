@@ -25,8 +25,7 @@ app.use(cookieParser())
 //data base connection here 
 database();
 const allowedOrigins = [
-  "https://study-notion-front-end-livid.vercel.app",
-  "http://localhost:5173/"
+  "https://study-notion-front-end-livid.vercel.app"
 ];
 
 
