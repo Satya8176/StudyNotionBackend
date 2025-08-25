@@ -28,7 +28,8 @@ exports.auth=async (req , res , next)=>{
   catch(err){
     return res.status(500).json({
       success:false,
-      message:"There is any internal issure "
+      message:"There is any internal issure ",
+      body:err.message
     })
   }
 }
